@@ -3,7 +3,7 @@
 // ascii 5x8 LCD font (256 characters)
 // 5 bytes, each byte is a column of data, MSB top LSB bottom..
 
-unsigned const char font[] = {
+const unsigned char font[] = {
 // code=000, hex=00, ASCII=' '
 00,00,00,00,00,
 // code=001, hex=01, ASCII=' '

@@ -22,11 +22,11 @@ void Minishift::startTransaction() {
 	}
 }
 
-void Minishift::writeColumns(const uint8_t *buf, int len) {
+void Minishift::writeColumns(const unsigned char *buf, int len) {
 	this->writeColumns(buf, len, -1);
 }
 
-void Minishift::writeColumns(const uint8_t *buf, int len, int ms) {
+void Minishift::writeColumns(const unsigned char *buf, int len, int ms) {
 	for(int i = 0; i < len; i++) {
 		this->startTransaction();
 		shiftOut(this->data_pin, this->clock_pin, LSBFIRST, buf[i]);
@@ -37,16 +37,16 @@ void Minishift::writeColumns(const uint8_t *buf, int len, int ms) {
 	}
 }
 
-void Minishift::writeString(const char *str) {
+void Minishift::writeString(const unsigned char *str) {
 	this->writeString(str, -1);
 }
 
-void Minishift::writeString(const char *str, int ms) {
+void Minishift::writeString(const unsigned char *str, int ms) {
 	this->writeString(str, ms, 0);
 }
 
-void Minishift::writeString(const char *str, int ms, int trailing) {
-	for(const char *c = str; *c != '\0'; c++) {
+void Minishift::writeString(const unsigned char *str, int ms, int trailing) {
+	for(const unsigned char *c = str; *c != '\0'; c++) {
 		for(int col = 0; col < 5; col++) {
 			this->startTransaction();
 			shiftOut(this->data_pin, this->clock_pin, LSBFIRST, pgm_read_byte(font + (*c * 5) + col));

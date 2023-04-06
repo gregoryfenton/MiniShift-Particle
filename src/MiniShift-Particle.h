@@ -12,11 +12,11 @@ class Minishift
   	void startTransaction();
   public:
   	Minishift(int data_pin, int clock_pin, int latch_pin);
-  	void writeColumns(const uint8_t *buf, int len);
-  	void writeColumns(const uint8_t *buf, int len, int ms);
-  	void writeString(const char *str);
-  	void writeString(const char *str, int ms);
-  	void writeString(const char *str, int ms, int trailing);
+  	void writeColumns(const unsigned char *buf, int len);
+  	void writeColumns(const unsigned char *buf, int len, int ms);
+  	void writeString(const unsigned char *str);
+  	void writeString(const unsigned char *str, int ms);
+  	void writeString(const unsigned char *str, int ms, int trailing);
   	void update();
 };
 
