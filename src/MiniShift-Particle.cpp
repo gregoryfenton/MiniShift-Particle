@@ -29,7 +29,13 @@ void Minishift::writeColumns(const unsigned char *buf, int len) {
 void Minishift::writeColumns(const unsigned char *buf, int len, int ms) {
 	for(int i = 0; i < len; i++) {
 		this->startTransaction();
-		shiftOut(this->data_pin, this->clock_pin, LSBFIRST, buf[i]);
+		shiftOut(this->data_pin, this->clock_pin,
+		#ifndef SWAPLSB
+			LSBFIRST
+		#else
+			MSBFIRST
+		#endif
+		, buf[i]);
 		this->update();
 		if(ms != -1) {
 			delay(ms);
@@ -49,7 +55,13 @@ void Minishift::writeString(const unsigned char *str, int ms, int trailing) {
 	for(const unsigned char *c = str; *c != '\0'; c++) {
 		for(int col = 0; col < 5; col++) {
 			this->startTransaction();
-			shiftOut(this->data_pin, this->clock_pin, LSBFIRST, pgm_read_byte(font + (*c * 5) + col));
+			shiftOut(this->data_pin, this->clock_pin, 
+			#ifndef SWAPLSB
+				LSBFIRST
+			#else
+				MSBFIRST
+			#endif
+			, pgm_read_byte(font + (*c * 5) + col));
 			this->update();
 			if(ms != -1) {
 				delay(ms);
@@ -57,7 +69,13 @@ void Minishift::writeString(const unsigned char *str, int ms, int trailing) {
 		}
 		for(int col = 0; col < trailing; col++) {
 			this->startTransaction();
-			shiftOut(this->data_pin, this->clock_pin, LSBFIRST, 0);
+			shiftOut(this->data_pin, this->clock_pin, 
+			#ifndef SWAPLSB
+				LSBFIRST
+			#else
+				MSBFIRST
+			#endif
+			, 0);
 			this->update();
 			if(ms != -1) {
 				delay(ms);

@@ -1,6 +1,8 @@
 #include "glcdfont.h"
 // ascii 5x8 LCD font (256 characters)
 // 5 bytes, each byte is a column of data, MSB top LSB bottom.
+// If LSB/MSB are swapped, # define SWAPLSB
+#define SWAPLSB
 
 const unsigned char font[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x3E, 0x5B, 0x4F, 0x5B, 0x3E, 0x3E, 0x6B,
